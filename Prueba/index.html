@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Test 1</title>
+    <link rel="stylesheet" href="c/jquery.mobile.min.css"/>
+    <script src="j/jquery.min.js" ></script>
+    <script src="j/jquery.mobile.min.js" ></script>
+  </head>
+  <body>
+
+    <div data-role="page" id="pag1">
+
+    <div data-role="header" data-postition="fixed">
+      <h1>Noticias<h1>
+    </div>
+
+    <div role="main" class="ui-content">
+    <ul id="listasX2">
+    </ul>
+
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    <h1>2015<h1>
+      <div data-role="navbar">
+        <ul>
+          <li>
+            <a href="#pag2" data-icon="gear">Página 2</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    </div>
+
+
+    <div data-role="page" id="pag2">
+
+      <div data-role="header" data-postition="fixed"  data-add-back-btn="true" data-back-btn-text="atras">
+        <h1><h1>
+        </div>
+
+        <div role="main">
+          <ul data-role="listview" data-inset="true">
+          </ul>
+
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+          <h1>Pie de pagina<h1>
+            <div data-role="navbar">
+
+            </div>
+          </div>
+
+        </div>
+
+<script>
+
+  $("#pag1").on("pagecreate",function(event){
+  $.get("http://www.reddit.com/r/honduras/new.json", //url
+  {}, //parametros
+function(data, success, xhr){
+  var listaXContent = "";
+  for(var i=0; i < data.items.length; i++){
+    var item = data.items[i];
+    listaXContent += "<li><a href>Item " + item.item + " - " + item.name  +"</a></li>";
+  }
+  $("#listasX2").html(listaXContent).listview();
+}, // handler
+"json"
+);
+console.log("listaXContent");
+
+});
+
+//http://www.reddit.com/r/honduras/
+</script>
+
+  </body>
+</html>
